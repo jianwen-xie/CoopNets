@@ -43,7 +43,7 @@ testing results will be saved in `./output/alp/test`
 
 
 ## Reference
-    @inproceedings{coopnets,
+    @article{coopnets,
         author = {Xie, Jianwen and Lu, Yang and Gao, Ruiqi and Zhu, Song-Chun and Wu, Ying Nian},
         title = {Cooperative Training of Descriptor and Generator Networks},
         journal={IEEE transactions on pattern analysis and machine intelligence (PAMI)},
@@ -51,4 +51,4 @@ testing results will be saved in `./output/alp/test`
         publisher={IEEE}
     }
     
-For any questions, please contact Jianwen Xie (jianwen@ucla.edu) and Ruiqi Gao (ruiqigao@ucla.edu) and Zilong Zheng (zilongzheng0318@ucla.edu)
+For any questions, please contact Jianwen Xie (jianwen@ucla.edu), Ruiqi Gao (ruiqigao@ucla.edu) and Zilong Zheng (zilongzheng0318@ucla.edu)
