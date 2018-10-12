@@ -1,7 +1,7 @@
-# Cooperative Learning of Energy-Based Model and Latent Variable Model via MCMC Teaching
+# Cooperative Training of Descriptor and Generator Networks
 
-This repository contains a tensorflow implementation for the paper "[Cooperative Learning of Energy-Based Model and Latent Variable Model via MCMC Teaching](http://www.stat.ucla.edu/~ywu/CoopNets/doc/CoopNets_AAAI.pdf)".
-(http://www.stat.ucla.edu/~ywu/CoopNets/main.html)
+This repository contains a tensorflow implementation for the paper "[Cooperative Training of Descriptor and Generator Networks](http://www.stat.ucla.edu/~jxie/CoopNets/CoopNets_files/doc/CoopNets_PAMI.pdf)".
+(http://www.stat.ucla.edu/~jxie/CoopNets/CoopNets.html)
 
 ## Requirements
 - Python 2.7 or Python 3.3+
