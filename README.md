@@ -44,10 +44,11 @@ testing results will be saved in `./output/alp/test`
 
 ## Reference
     @inproceedings{coopnets,
-        author = {Xie, Jianwen and Lu, Yang and Gao, Ruiqi and Wu, Ying Nian},
-        title = {Cooperative Learning of Energy-Based Model and Latent Variable Model via MCMC Teaching},
-        booktitle = {The 32nd AAAI Conference on Artitifical Intelligence},
-        year = {2018}
+        author = {Xie, Jianwen and Lu, Yang and Gao, Ruiqi and Zhu, Song-Chun and Wu, Ying Nian},
+        title = {Cooperative Training of Descriptor and Generator Networks},
+        journal={IEEE transactions on pattern analysis and machine intelligence (PAMI)},
+        year = {2018},
+        publisher={IEEE}
     }
     
-For any questions, please contact Jianwen Xie (jianwen@ucla.edu) and Zilong Zheng (zilongzheng0318@ucla.edu)
+For any questions, please contact Jianwen Xie (jianwen@ucla.edu) and Ruiqi Gao (ruiqigao@ucla.edu) and Zilong Zheng (zilongzheng0318@ucla.edu)
