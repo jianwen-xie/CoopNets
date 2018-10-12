@@ -1,7 +1,8 @@
 # Cooperative Training of Descriptor and Generator Networks
 
 This repository contains a tensorflow implementation for the paper "[Cooperative Training of Descriptor and Generator Networks](http://www.stat.ucla.edu/~jxie/CoopNets/CoopNets_files/doc/CoopNets_PAMI.pdf)".
-(http://www.stat.ucla.edu/~jxie/CoopNets/CoopNets.html)
+
+Project Page: (http://www.stat.ucla.edu/~jxie/CoopNets/CoopNets.html)
 
 ## Requirements
 - Python 2.7 or Python 3.3+
@@ -13,22 +14,30 @@ This repository contains a tensorflow implementation for the paper "[Cooperative
 
 (1) For scene synthesis
 
-First, put your scene data folder to `./data` directory:
+(i) Training
 
-    $ python download.py scene
+First, put your data folder into `./data/scene/` directory, e.g., `./data/scene/rock/`
+  
+To train a model with ***rock*** dataset:
 
-To train a model with ***alp*** dataset:
+    $ python main.py --category rock --data_dir ./data/scene --output_dir ./output
 
-    $ python main.py --category alp --data_dir ./data/scene --output_dir ./output 
+synthesized results will be saved in `./output/rock/synthesis`. 
 
-synthesized results will be saved in `./output/alp/synthesis`. 
+learned models will be saved in `./output/rock/checkpoints`. 
 
-If you want to calculate inception score, use --calculate_inception=True. If category is mnist, data will be downloaded and parzen window-based log-likelihood is calculated automatically. 
+If you want to calculate inception score, use --calculate_inception=True. 
+
+(ii) Testing for image synthesis
 
 To test generator by synthesizing interpolation results with trained model:
 
-    $ python main.py --test --sample_size 144 --category alp --output_dir ./output --ckpt ./output/alp/checkpoints/model.ckpt
+    $ python main.py --test True --test_type syn --category rock --output_dir ./output --ckpt ./output/rock/checkpoints/model.ckpt-82000
+
 testing results will be saved in `./output/alp/test`
+
+
+If category is mnist, data will be downloaded and parzen window-based log-likelihood is calculated automatically. 
 
 ## Results
 ### Results of [MIT Place205](http://places.csail.mit.edu) dataset
