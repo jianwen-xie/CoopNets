@@ -20,24 +20,40 @@ First, put your data folder into `./data/scene/` directory, e.g., `./data/scene/
   
 To train a model with ***rock*** dataset:
 
-    $ python main.py --category rock --data_dir ./data/scene --output_dir ./output
+    $ python main.py --category rock --data_dir ./data/scene --output_dir ./output --net_type scene --image_size 64
 
-synthesized results will be saved in `./output/rock/synthesis`. 
+The synthesized results will be saved in `./output/rock/synthesis`. 
 
-learned models will be saved in `./output/rock/checkpoints`. 
+The learned models will be saved in `./output/rock/checkpoints`. 
 
 If you want to calculate inception score, use --calculate_inception=True. 
 
 (ii) Testing for image synthesis
 
-To test generator by synthesizing interpolation results with trained model:
-
     $ python main.py --test True --test_type syn --category rock --output_dir ./output --ckpt ./output/rock/checkpoints/model.ckpt-82000
 
-testing results will be saved in `./output/alp/test`
+testing results will be saved in `./output/rock/test/synthesis`
 
+(iii) Testing for interpolation
 
-If category is mnist, data will be downloaded and parzen window-based log-likelihood is calculated automatically. 
+To test generator by synthesizing interpolation results with trained model:
+
+    $ python main.py --test True --test_type inter --category rock --output_dir ./output --ckpt ./output/rock/checkpoints/model.ckpt-82000
+    
+testing results will be saved in `./output/rock/test/interpolation`
+    
+(2) For MNIST handwritten digits synthesis
+
+If category is mnist, training data will be downloaded automatically 
+
+    $ python main.py --category mnist --net_type mnist --image_size 28
+
+If you want to calculate parzen window-based log-likelihood, use --calculate_parzen=True. 
+
+The synthesized results will be saved in `./output/mnist/synthesis`. 
+
+The learned models will be saved in `./output/mnist/checkpoints`. 
+
 
 ## Results
 ### Results of [MIT Place205](http://places.csail.mit.edu) dataset
