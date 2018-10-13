@@ -56,16 +56,8 @@ The learned models will be saved in `./output/mnist/checkpoints`.
 
 
 ## Results
-### Results of [MIT Place205](http://places.csail.mit.edu) dataset
-**Descriptor result**
-![descriptor](assets/descriptor.png)
-
-**Generator result**
-![generator](assets/generator.png)
-
-**Interpolation result**
-![interpolation](assets/interpolation.png)
-
+<p align="center">
+    <img src="https://github.com/jianwen-xie/CoopNets/blob/master/demo/des_syn.png" width="350px"/></p>
 
 ## Reference
     @article{coopnets,
