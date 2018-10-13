@@ -56,9 +56,16 @@ The learned models will be saved in `./output/mnist/checkpoints`.
 
 
 ## Results
+Synthesis
 <p align="center">
-    <img src="https://github.com/jianwen-xie/CoopNets/blob/master/demo/des_syn.png" width="300px"/>
-    <img src="https://github.com/jianwen-xie/CoopNets/blob/master/demo/des_syn_mnist.png" width="300px"/></p>
+    <img src="https://github.com/jianwen-xie/CoopNets/blob/master/demo/des_syn.png" width="350px"/>
+    <img src="https://github.com/jianwen-xie/CoopNets/blob/master/demo/des_syn_mnist.png" width="350px"/>
+</p>
+    
+Interpolation
+<p align="center">
+    <img src="https://github.com/jianwen-xie/CoopNets/blob/master/demo/des_syn_mnist.png" width="350px"/>
+</p>
 
 ## Reference
     @article{coopnets,
