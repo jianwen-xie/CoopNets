@@ -12,7 +12,7 @@ Project Page: (http://www.stat.ucla.edu/~jxie/CoopNets/CoopNets.html)
 
 ## Usage
 
-(1) For scene synthesis
+### (1) For scene synthesis
 
 (i) Training
 
@@ -42,7 +42,7 @@ To test generator by synthesizing interpolation results with trained model:
     
 testing results will be saved in `./output/rock/test/interpolation`
     
-(2) For MNIST handwritten digits synthesis
+### (2) For MNIST handwritten digits synthesis
 
 If category is mnist, training data will be downloaded automatically 
 
