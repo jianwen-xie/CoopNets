@@ -4,6 +4,19 @@ This repository contains a tensorflow implementation for the paper "[Cooperative
 
 Project Page: (http://www.stat.ucla.edu/~jxie/CoopNets/CoopNets.html)
 
+## Reference
+    @article{coopnets,
+        author = {Xie, Jianwen and Lu, Yang and Gao, Ruiqi and Zhu, Song-Chun and Wu, Ying Nian},
+        title = {Cooperative Training of Descriptor and Generator Networks},
+        journal={IEEE transactions on pattern analysis and machine intelligence (PAMI)},
+        year = {2018},
+        publisher={IEEE}
+    }
+    
+## Related code
+For Experiment 7 (dynamic texture synthesis by Spatial-temporal CoopNets), please go to
+https://github.com/jianwen-xie/Spatial-Temporal-CoopNets
+    
 ## Requirements
 - Python 2.7 or Python 3.3+
 - [Tensorflow r1.0+](https://www.tensorflow.org/install/)
@@ -67,13 +80,5 @@ Interpolation
     <img src="https://github.com/jianwen-xie/CoopNets/blob/master/demo/des_syn_mnist.png" width="350px"/>
 </p>
 
-## Reference
-    @article{coopnets,
-        author = {Xie, Jianwen and Lu, Yang and Gao, Ruiqi and Zhu, Song-Chun and Wu, Ying Nian},
-        title = {Cooperative Training of Descriptor and Generator Networks},
-        journal={IEEE transactions on pattern analysis and machine intelligence (PAMI)},
-        year = {2018},
-        publisher={IEEE}
-    }
-    
+
 For any questions, please contact Jianwen Xie (jianwen@ucla.edu), Ruiqi Gao (ruiqigao@ucla.edu) and Zilong Zheng (zilongzheng0318@ucla.edu)
