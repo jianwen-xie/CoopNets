@@ -12,8 +12,8 @@ from model.model import CoopNets
 FLAGS = tf.app.flags.FLAGS
 
 # learning parameters
-tf.flags.DEFINE_string('net_type', 'scene', 'network type: [scene/mnist]')
-tf.flags.DEFINE_integer('image_size', 64, 'Image size to rescale images') # 64 for scene, and 28 for mnist
+tf.flags.DEFINE_string('net_type', 'mnist', 'network type: [scene/mnist]')
+tf.flags.DEFINE_integer('image_size', 28, 'Image size to rescale images') # 64 for scene, and 28 for mnist
 tf.flags.DEFINE_integer('batch_size', 100, 'Batch size of training images')
 tf.flags.DEFINE_integer('num_epochs', 1000, 'Number of epochs to train')
 tf.flags.DEFINE_integer('nTileRow', 12, 'Row number of synthesized images')
@@ -35,17 +35,17 @@ tf.flags.DEFINE_float('gen_step_size', 0.1, 'Step size for generator Langevin dy
 tf.flags.DEFINE_integer('gen_latent_size', 100, 'Number of dimensions of latent variables')
 
 # utils
-tf.flags.DEFINE_string('data_dir', './data/scene', 'The data directory')
-tf.flags.DEFINE_string('category', 'rock', 'The name of dataset')
+tf.flags.DEFINE_string('data_dir', './data/', 'The data directory')
+tf.flags.DEFINE_string('category', 'mnist', 'The name of dataset')
 tf.flags.DEFINE_boolean('prefetch', True, 'True if reading all images at once')
-tf.flags.DEFINE_boolean('calculate_inception', True, 'True if inception score is calculated (only for scene dataset)')
-tf.flags.DEFINE_boolean('calculate_parzen', True, 'True if parzen score is calculated (only for MNIST dataset)')
+tf.flags.DEFINE_boolean('calculate_inception', False, 'True if inception score is calculated (only for scene dataset)')
+tf.flags.DEFINE_boolean('calculate_parzen', False, 'True if parzen score is calculated (only for MNIST dataset)')
 tf.flags.DEFINE_integer('read_len', 500, 'Number of batches per reading')
 tf.flags.DEFINE_string('output_dir', './output', 'The output directory for saving results')
 tf.flags.DEFINE_integer('log_step', 50, 'Number of minibatches to save output results')
-tf.flags.DEFINE_boolean('test', False, 'True if in testing mode')
+tf.flags.DEFINE_boolean('test', True, 'True if in testing mode')
 tf.flags.DEFINE_string('test_type', 'inter', 'testing type: [inter/syn]: inter: interpolation | syn: synthesis')
-tf.flags.DEFINE_string('ckpt', None, 'Checkpoint path to load: e.g., output/rock/checkpoints/model.ckpt-2000')
+tf.flags.DEFINE_string('ckpt', 'output/mnist/checkpoints/model.ckpt-501000', 'Checkpoint path to load: e.g., output/rock/checkpoints/model.ckpt-2000')
 tf.flags.DEFINE_integer('sample_size', 100, 'Number of images to generate during test.')
 
 

@@ -236,8 +236,8 @@ class CoopNets(object):
                     # save synthesis images
                     if not os.path.exists(self.sample_dir):
                         os.makedirs(self.sample_dir)
-                    saveSampleResults(syn, "%s/des%06d.png" % (self.sample_dir, minibatch), col_num=self.nTileCol)
-                    saveSampleResults(g_res, "%s/gen%06d.png" % (self.sample_dir, minibatch), col_num=self.nTileCol)
+                    saveSampleResults(syn, "%s/des_%06d_%06d.png" % (self.sample_dir, epoch, minibatch), col_num=self.nTileCol)
+                    saveSampleResults(g_res, "%s/gen_%06d_%06d.png" % (self.sample_dir, epoch, minibatch), col_num=self.nTileCol)
 
                 if minibatch % (self.log_step * 20) == 0:
                     # save check points
