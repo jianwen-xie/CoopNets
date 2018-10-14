@@ -78,6 +78,7 @@ Synthesis
 Interpolation
 <p align="center">
     <img src="https://github.com/jianwen-xie/CoopNets/blob/master/demo/interp.png" width="350px"/>
+    <img src="https://github.com/jianwen-xie/CoopNets/blob/master/demo/interp_mnist.png" width="350px"/>
 </p>
 
 
