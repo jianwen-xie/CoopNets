@@ -6,9 +6,6 @@ import os
 import math
 import numpy as np
 import scipy.misc
-from sklearn.externals.joblib import Parallel, delayed
-import skimage
-from skimage import io
 from six.moves import xrange
 import tensorflow as tf
 from PIL import Image

@@ -1,13 +1,11 @@
-import argparse
 import time
 import numpy as np
 import tensorflow as tf
-from scipy import io
 from model.utils.mnist_util import maybe_download_minst
 
 def get_valid(ds, limit_size=-1):
     if ds == 'mnist':
-        train_images, train_labels = maybe_download_minst('../data/mnist', train=True, one_hot=False)
+        train_images, train_labels = maybe_download_minst('./MNIST-data', train=True, one_hot=False)
         validation_images = train_images[50000:60000]
         validation_images = np.multiply(validation_images, 1.0 / 255)
         validation_images = np.reshape(validation_images, [-1, 784])
@@ -19,7 +17,7 @@ def get_valid(ds, limit_size=-1):
 def get_test(ds):
 
     if ds == 'mnist':
-        test_data, test_labels = maybe_download_minst('../data/mnist', train=False, one_hot=False)
+        test_data, test_labels = maybe_download_minst('./MNIST-data', train=False, one_hot=False)
         test_data = np.reshape(test_data, [-1, 784])
         return np.asarray(test_data, dtype=np.float32)
     else:
@@ -51,15 +49,17 @@ def tf_parzen(x, mu, sigma):
 
 
 class ParsenDensityEsimator():
-    def __init__(self, sess, args):
-        self.batch_size = args.batch_size
 
-        self.sigma = args.sigma
-        self.limit_size = args.limit_size
-        self.dataset = args.dataset
-        self.sigma_start = args.sigma_start
-        self.sigma_end = args.sigma_end
-        self.cross_val = args.cross_val
+    def __init__(self, sess, batch_size=100, sigma=None, limit_size=1000, dataset='mnist', sigma_start=-1, sigma_end=0, cross_val=10):
+
+        self.batch_size = batch_size
+        self.sigma = sigma
+        self.limit_size = limit_size
+        self.dataset = dataset
+        self.sigma_start = sigma_start
+        self.sigma_end = sigma_end
+        self.cross_val = cross_val
+
         self.x = tf.placeholder(tf.float32, shape=[None, 784])
         self.samples = tf.placeholder(tf.float32, shape=[None, 784])
         self.sigma_placeholder = tf.placeholder(tf.float32)
@@ -121,76 +121,24 @@ class ParsenDensityEsimator():
 
         return ll.mean(), se
 
+    def eval_parzen(self, samples_des, samples_gen):
 
-def main():
-    parser = argparse.ArgumentParser(description='Parzen window, log-likelihood estimator')
-    parser.add_argument('-p', '--path', help='model path')
-    parser.add_argument('-s', '--sigma', default=None)
-    parser.add_argument('-d', '--dataset', choices=['mnist', 'tfd'], default='mnist')
-    parser.add_argument('-f', '--fold', default=0, type=int)
-    parser.add_argument('-v', '--valid', default=False, action='store_true')
-    parser.add_argument('-n', '--num_samples', default=10000, type=int)
-    parser.add_argument('-l', '--limit_size', default=1000, type=int)
-    parser.add_argument('-b', '--batch_size', default=100, type=int)
-    parser.add_argument('-c', '--cross_val', default=10, type=int,
-                            help="Number of cross valiation folds")
-    parser.add_argument('--sigma_start', default=-1, type=float)
-    parser.add_argument('--sigma_end', default=0., type=float)
-    args = parser.parse_args()
+        samples_des = np.maximum(-1, np.minimum(1, samples_des))
+        samples_des = (samples_des - samples_des.min()) / (samples_des.max() - samples_des.min())
+        samples_des = np.asarray(np.reshape(samples_des, [-1, samples_des.shape[1] * samples_des.shape[2]]),
+                                 dtype=np.float32)
 
-    # load model
-    # model = serial.load(args.path)
-    # src = model.dataset_yaml_src
-    # model.set_batch_size(batch_size)
+        samples_gen = np.maximum(-1, np.minimum(1, samples_gen))
+        samples_gen = (samples_gen - samples_gen.min()) / (samples_gen.max() - samples_gen.min())
+        samples_gen = np.asarray(np.reshape(samples_gen, [-1, samples_gen.shape[1] * samples_gen.shape[2]]),
+                                 dtype=np.float32)
+        test = get_test(self.dataset)
+        # test = get_test(parzen_args['dataset'])
+        test = np.multiply(test, 1.0 / 255)
 
-    # load test set
-    # test = yaml_parse.load(src)
-    # test = get_test(args.dataset, test, args.fold)
-    test = get_test(args.dataset)
-    test = np.multiply(test, 1.0 / 255)
-    print(test.shape, np.max(test), np.min(test))
-    # generate samples
-    # samples = model.generator.sample(args.num_samples).eval()
-    # output_space = model.generator.mlp.get_output_space()
-    # if 'Conv2D' in str(output_space):
-    #     samples = output_space.convert(samples, output_space.axes, ('b', 0, 1, 'c'))
-    #     samples = samples.reshape((samples.shape[0], np.prod(samples.shape[1:])))
-    # del model
-    # gc.collect()
-    samples = np.asarray(io.loadmat('./data10000.mat')['data'], dtype=np.float32).reshape([-1, 784])
-    # samples = np.load('samples.npy').astype(np.float32)
-    samples = samples[:10000]
-    samples = np.maximum(-1, np.minimum(1, samples))
-    for i in xrange(len(samples)):
-        img = samples[i]
-        samples[i] = (img - img.min()) / (img.max() - img.min())
-    # samples = normalize_data(samples, low=0, high=255, shape=(28, 28))
-    # samples = np.reshape(samples, [-1, 784])
-    print(samples.shape, np.max(samples), np.min(samples))
-    print(type(samples))
-    # samples = np.random.uniform(0, 1, size=[10000, 784]).astype(np.float32)
-    # train_data, train_labels = maybe_download_minst('../data/mnist', train=True, one_hot=False)
-    # indices = np.arange(len(train_data))
-    # np.random.shuffle(indices)
-    # indices = indices[:10000]
-    # train_data = train_data[indices]
-    # samples = np.reshape(train_data, [-1, 784]).astype(np.float32)
-    # samples = np.multiply(samples, 1.0 /255)
-    # print(samples.shape)
+        parzon_des_mean, parzon_des_se = self.fit(samples_des, test)
+        parzon_gen_mean, parzon_gen_se = self.fit(samples_gen, test)
 
-    with tf.Session() as sess:
-        kde = ParsenDensityEsimator(sess, args)
-        kde.fit(samples, test)
-    # gc.collect()
+        return parzon_des_mean, parzon_des_se, parzon_gen_mean, parzon_gen_se
 
 
-    # valid
-    # if args.valid:
-    #     valid = get_valid(args.dataset)
-    #     ll = get_nll(valid, parzen, batch_size = batch_size)
-    #     se = ll.std() / np.sqrt(val.shape[0])
-    #     print("Log-Likelihood of valid set = {}, se: {}".format(ll.mean(), se))
-
-
-if __name__ == "__main__":
-    main()

@@ -12,7 +12,6 @@ from model.utils.data_io import DataSet, saveSampleResults
 from model.utils.parzen_ll import ParsenDensityEsimator
 from model.utils.inception_model import *
 import scipy.io as sio
-from model.utils.eval_util import eval_parzen
 
 
 class CoopNets(object):
@@ -167,8 +166,8 @@ class CoopNets(object):
 
         # measure 1: Parzon-window based likelihood
         if self.calculate_parzen:
-            from model.utils.parzen_args import args
-            kde = ParsenDensityEsimator(sess, args)
+
+            kde = ParsenDensityEsimator(sess)
             parzon_des_mean_list, parzon_des_se_list = [], []
             parzon_gen_mean_list, parzon_gen_se_list = [], []
             parzon_log_file = os.path.join(self.output_dir, 'parzon.txt')
@@ -265,7 +264,7 @@ class CoopNets(object):
                 samples_des = sample_results_des[:10000]
                 samples_gen = sample_results_gen[:10000]
 
-                parzon_des_mean, parzon_des_se, parzon_gen_mean, parzon_gen_se = eval_parzen(kde, samples_des, samples_gen)
+                parzon_des_mean, parzon_des_se, parzon_gen_mean, parzon_gen_se = kde.eval_parzen(samples_des, samples_gen)
 
                 parzon_des_mean_list.append(parzon_des_mean)
                 parzon_des_se_list.append(parzon_des_se)
