@@ -29,7 +29,7 @@ https://github.com/jianwen-xie/Spatial-Temporal-CoopNets
 
 (i) Training
 
-First, put your data folder into `./data/scene/` directory, e.g., `./data/scene/rock/`
+First, prepare your data into a folder, for example `./data/scene/rock` 
   
 To train a model with ***rock*** dataset:
 
@@ -41,9 +41,9 @@ The learned models will be saved in `./output/rock/checkpoints`.
 
 If you want to calculate inception score, use --calculate_inception=True. 
 
-(ii) Testing for image synthesis
-
-    $ python main.py --test True --test_type syn --category rock --output_dir ./output --ckpt ./output/rock/checkpoints/model.ckpt-82000
+(ii) Testing for image synthesis  
+    
+    $ python main.py --test --test_type syn --category rock --net_type scene --image_size 64 --output_dir ./output --ckpt ./output/rock/checkpoints/model.ckpt-82000
 
 testing results will be saved in `./output/rock/test/synthesis`
 
@@ -51,7 +51,8 @@ testing results will be saved in `./output/rock/test/synthesis`
 
 To test generator by synthesizing interpolation results with trained model:
 
-    $ python main.py --test True --test_type inter --category rock --output_dir ./output --ckpt ./output/rock/checkpoints/model.ckpt-82000
+    $ python main.py --test --test_type inter --category rock --net_type scene --image_size 64 --output_dir ./output --ckpt ./output/rock/checkpoints/model.ckpt-82000
+  
     
 testing results will be saved in `./output/rock/test/interpolation`
     
@@ -60,6 +61,8 @@ testing results will be saved in `./output/rock/test/interpolation`
 If category is mnist, training data will be downloaded automatically 
 
     $ python main.py --category mnist --net_type mnist --image_size 28
+    
+The training data will be saved in folder `./MNIST-data`
 
 If you want to calculate parzen window-based log-likelihood, use --calculate_parzen=True. 
 
